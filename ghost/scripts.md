@@ -1,4 +1,4 @@
-# Backup
+### Backup
 ```shell
 docker run --volumes-from ghost_data_1 \
   --rm=true \
@@ -15,16 +15,16 @@ docker run --volumes-from ghost_data_1 \
   tar zcvf /backup/ghost-backup-$(date +%Y-%m-%d).tar.gz /var/lib/ghost
 ```
 
-# Restore
+### Restore
 ```shell
 docker run --volumes-from ghost_data_1 \
   --rm=true \
   -v $(pwd):/backup \
   ubuntu \
-  tar zxvf /backup/ghost-backup-$(date +%Y-%m-%d).tar.gz
+  tar zxvf /backup/ghost-backup.tar.gz
 ```
 
-# Install custom theme
+### Install custom theme
 ```shell
 docker run --volumes-from ghost_data_1 \
   --rm=true \
@@ -34,7 +34,7 @@ docker run --volumes-from ghost_data_1 \
     rm -rf /var/lib/ghost/themes/gchan-casper/.*'
 ```
 
-# View data volume
+### View data volume
 ```shell
 docker run --volumes-from ghost_data_1 \
   --rm=true \
