@@ -1,0 +1,20 @@
+test-65:
+  environment:
+    - consumer_key=mysecret
+    - consumer_secret=mysecret
+    - access_token=mysecret
+    - access_token_secret=mysecret
+
+prod-150:
+  environment:
+    - consumer_key=mysecret
+    - consumer_secret=mysecret
+    - access_token=mysecret
+    - access_token_secret=mysecret
+
+prod-250:
+  environment:
+    - consumer_key=mysecret
+    - consumer_secret=mysecret
+    - access_token=mysecret
+    - access_token_secret=mysecret
