@@ -6,7 +6,7 @@ app:
   image: gordonchan/ghost-mailgun
   volumes_from:
     - data
-  restart: on-failure
+  restart: unless-stopped
   ports:
     - "2368:2368"
 server:
@@ -16,4 +16,4 @@ server:
   ports:
     - "80:80"
     - "443:443"
-  restart: on-failure
+  restart: unless-stopped
