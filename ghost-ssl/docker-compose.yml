@@ -1,0 +1,25 @@
+ghost_data:
+  image: tianon/true
+  volumes:
+    - /var/lib/ghost
+certs_data:
+  image: tianon/true
+  volumes:
+    - /etc/nginx/certs
+app:
+  image: gordonchan/ghost-mailgun
+  volumes_from:
+    - ghost_data
+  restart: unless-stopped
+  ports:
+    - "2368:2368"
+server:
+  image: gordonchan/nginx-ssl-ghost
+  volumes_from:
+    - certs_data
+  links:
+    - app:ghost
+  ports:
+    - "80:80"
+    - "443:443"
+  restart: unless-stopped
