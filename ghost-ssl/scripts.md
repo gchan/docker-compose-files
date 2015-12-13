@@ -44,7 +44,7 @@ docker run --volumes-from ghostssl_data_1 \
 
 ### View data volume
 ```shell
-docker run --volumes-from ghostssl_ghostssl_data_1 \
+docker run --volumes-from ghostssl_ghost_data_1 \
   --rm=true \
   -v $(pwd):/backup \
   -it \
