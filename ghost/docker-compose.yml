@@ -1,11 +1,15 @@
-data:
+ghost_data:
   image: tianon/true
   volumes:
     - /var/lib/ghost
+ghost_backup_data:
+  image: tianon/true
+  volumes:
+    - /backups
 app:
   image: gordonchan/ghost-mailgun
   volumes_from:
-    - data
+    - ghost_data
   restart: unless-stopped
   ports:
     - "2368:2368"
@@ -17,3 +21,8 @@ server:
     - "80:80"
     - "443:443"
   restart: unless-stopped
+ghost_backup:
+  image: bennetimo/ghost-backup
+  volumes_from:
+    - ghost_data
+    - ghost_backup_data

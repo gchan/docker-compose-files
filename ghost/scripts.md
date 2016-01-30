@@ -1,6 +1,6 @@
 ### Backup
 ```shell
-docker run --volumes-from ghost_data_1 \
+docker run --volumes-from ghost_ghost_data_1 \
   --rm=true \
   -v $(pwd):/backup \
   ubuntu \
@@ -8,7 +8,7 @@ docker run --volumes-from ghost_data_1 \
 ```
 
 ```shell
-docker run --volumes-from ghost_data_1 \
+docker run --volumes-from ghost_ghost_data_1 \
   --rm=true \
   -v $(pwd):/backup \
   ubuntu \
@@ -16,12 +16,16 @@ docker run --volumes-from ghost_data_1 \
 ```
 
 ```shell
-docker cp ghost_data_1:/var/lib/ghost/ ./backup/ghost-$(date +%Y-%m-%d)
+docker cp ghost_ghost_data_1:/var/lib/ghost/ ./backup/ghost-$(date +%Y-%m-%d)
+```
+
+```shell
+docker cp ghostssl_ghost_backup_data_1:/backups/ ./backup/
 ```
 
 ### Restore
 ```shell
-docker run --volumes-from ghost_data_1 \
+docker run --volumes-from ghost_ghost_data_1 \
   --rm=true \
   -v $(pwd):/backup \
   ubuntu \
@@ -29,12 +33,17 @@ docker run --volumes-from ghost_data_1 \
 ```
 
 ```shell
-docker cp ./backup/ghost-$(date +%Y-%m-%d)/. ghost_data_1:/var/lib/ghost
+docker cp ./backup/ghost-$(date +%Y-%m-%d)/. ghost_ghost_data_1:/var/lib/ghost
+```
+
+```shell
+docker cp ./backup/backups/. ghostssl_ghost_backup_data_1:/backups/
+docker exec -it ghostssl_ghost_backup_1 restore -i
 ```
 
 ### Install custom theme
 ```shell
-docker run --volumes-from ghost_data_1 \
+docker run --volumes-from ghost_ghost_data_1 \
   --rm=true \
   -v $(pwd):/backup \
   ubuntu \
@@ -44,7 +53,7 @@ docker run --volumes-from ghost_data_1 \
 
 ### View data volume
 ```shell
-docker run --volumes-from ghost_data_1 \
+docker run --volumes-from ghost_ghost_data_1 \
   --rm=true \
   -v $(pwd):/backup \
   -it \

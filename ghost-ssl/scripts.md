@@ -19,6 +19,10 @@ docker run --volumes-from ghostssl_ghost_data_1 \
 docker cp ghostssl_ghost_data_1:/var/lib/ghost/ ./backup/ghost-$(date +%Y-%m-%d)
 ```
 
+```shell
+docker cp ghostssl_ghost_backup_data_1:/backups/ ./backup/
+```
+
 ### Restore
 ```shell
 docker run --volumes-from ghostssl_ghost_data_1 \
@@ -30,6 +34,11 @@ docker run --volumes-from ghostssl_ghost_data_1 \
 
 ```shell
 docker cp ./backup/ghost-$(date +%Y-%m-%d)/. ghostssl_ghost_data_1:/var/lib/ghost
+```
+
+```shell
+docker cp ./backup/backups/. ghostssl_ghost_backup_data_1:/backups/
+docker exec -it ghostssl_ghost_backup_1 restore -i
 ```
 
 ### Install custom theme

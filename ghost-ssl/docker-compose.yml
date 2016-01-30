@@ -2,6 +2,10 @@ ghost_data:
   image: tianon/true
   volumes:
     - /var/lib/ghost
+ghost_backup_data:
+  image: tianon/true
+  volumes:
+    - /backups
 certs_data:
   image: tianon/true
   volumes:
@@ -23,3 +27,8 @@ server:
     - "80:80"
     - "443:443"
   restart: unless-stopped
+ghost_backup:
+  image: bennetimo/ghost-backup
+  volumes_from:
+    - ghost_data
+    - ghost_backup_data
