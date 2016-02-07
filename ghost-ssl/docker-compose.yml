@@ -1,34 +1,36 @@
-ghost_data:
-  image: tianon/true
-  volumes:
-    - /var/lib/ghost
-ghost_backup_data:
-  image: tianon/true
-  volumes:
-    - /backups
-certs_data:
-  image: tianon/true
-  volumes:
-    - /etc/nginx/certs
-app:
-  image: gordonchan/ghost-mailgun
-  volumes_from:
-    - ghost_data
-  restart: unless-stopped
-  ports:
-    - "2368:2368"
-server:
-  image: gordonchan/nginx-ssl-ghost
-  volumes_from:
-    - certs_data
-  links:
-    - app:ghost
-  ports:
-    - "80:80"
-    - "443:443"
-  restart: unless-stopped
-ghost_backup:
-  image: bennetimo/ghost-backup
-  volumes_from:
-    - ghost_data
-    - ghost_backup_data
+version: '2'
+
+services:
+  ghost_data:
+    image: tianon/true
+    volumes:
+      - /var/lib/ghost
+  ghost_backup_data:
+    image: tianon/true
+    volumes:
+      - /backups
+  certs_data:
+    image: tianon/true
+    volumes:
+      - /etc/nginx/certs
+  app:
+    image: gordonchan/ghost-mailgun
+    volumes_from:
+      - ghost_data
+    restart: unless-stopped
+  server:
+    image: gordonchan/nginx-ssl-ghost
+    volumes_from:
+      - certs_data
+    links:
+      - app:ghost
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped
+  ghost_backup:
+    image: bennetimo/ghost-backup
+    volumes_from:
+      - ghost_data
+      - ghost_backup_data
+    restart: unless-stopped

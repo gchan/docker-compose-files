@@ -1,18 +1,21 @@
-test-65:
-  image: gordonchan/spotbot
-  mem_limit: 40M
-  restart: unless-stopped
-  environment:
-    - price_threshold=65
+version: '2'
 
-prod-150:
-  image: gordonchan/spotbot
-  mem_limit: 40M
-  restart: unless-stopped
-  environment:
-    - price_threshold=150
+services:
+  test-65:
+    image: gordonchan/spotbot
+    mem_limit: 40M
+    restart: unless-stopped
+    environment:
+      - price_threshold=65
 
-prod-250:
-  image: gordonchan/spotbot
-  mem_limit: 40M
-  restart: unless-stopped
+  prod-150:
+    image: gordonchan/spotbot
+    mem_limit: 40M
+    restart: unless-stopped
+    environment:
+      - price_threshold=150
+
+  prod-250:
+    image: gordonchan/spotbot
+    mem_limit: 40M
+    restart: unless-stopped
