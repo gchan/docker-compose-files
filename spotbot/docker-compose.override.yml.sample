@@ -1,21 +1,21 @@
 version: '2'
 
 services:
-  test-65:
+  test_65:
     environment:
       - consumer_key=mysecret
       - consumer_secret=mysecret
       - access_token=mysecret
       - access_token_secret=mysecret
 
-  prod-150:
+  prod_150:
     environment:
       - consumer_key=mysecret
       - consumer_secret=mysecret
       - access_token=mysecret
       - access_token_secret=mysecret
 
-  prod-250:
+  prod_250:
     environment:
       - consumer_key=mysecret
       - consumer_secret=mysecret

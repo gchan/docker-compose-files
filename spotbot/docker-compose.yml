@@ -1,21 +1,21 @@
 version: '2'
 
 services:
-  test-65:
+  test_65:
     image: gordonchan/spotbot
     mem_limit: 40M
     restart: unless-stopped
     environment:
       - price_threshold=65
 
-  prod-150:
+  prod_150:
     image: gordonchan/spotbot
     mem_limit: 40M
     restart: unless-stopped
     environment:
       - price_threshold=150
 
-  prod-250:
+  prod_250:
     image: gordonchan/spotbot
     mem_limit: 40M
     restart: unless-stopped
