@@ -1,61 +1,38 @@
-### Backup
+### Manual Backup
 ```shell
-docker run --volumes-from ghost_ghost_data_1 \
+docker run -v ghost_ghost_data:/var/lib/ghost \
   --rm=true \
-  -v $(pwd):/backup \
+  -v /tmp:/tmp \
   ubuntu \
-  tar zcvf /backup/ghost-backup.tar.gz /var/lib/ghost
+  tar zcvf /tmp/ghost-backup-$(date +%Y-%m-%d).tar.gz /var/lib/ghost
 ```
 
 ```shell
-docker run --volumes-from ghost_ghost_data_1 \
+docker-machine scp docker:/tmp/ghost-backup-$(date +%Y-%m-%d).tar.gz ./backup/.
+```
+
+### Restore from local file
+```shell
+docker-machine scp ./backup/ghost-backup-2016-08-09.tar.gz docker:/tmp/.
+```
+
+```shell
+docker run -v ghost_ghost_data:/var/lib/ghost \
   --rm=true \
-  -v $(pwd):/backup \
+  -v /tmp:/tmp \
   ubuntu \
-  tar zcvf /backup/ghost-backup-$(date +%Y-%m-%d).tar.gz /var/lib/ghost
+  tar zxvf /tmp/ghost-backup-2016-08-09.tar.gz
 ```
 
+### Restore from automated backups
 ```shell
-docker cp ghost_ghost_data_1:/var/lib/ghost/ ./backup/ghost-$(date +%Y-%m-%d)
-```
-
-```shell
-docker cp ghostssl_ghost_backup_data_1:/backups/ ./backup/
-```
-
-### Restore
-```shell
-docker run --volumes-from ghost_ghost_data_1 \
-  --rm=true \
-  -v $(pwd):/backup \
-  ubuntu \
-  tar zxvf /backup/ghost-backup.tar.gz
-```
-
-```shell
-docker cp ./backup/ghost-$(date +%Y-%m-%d)/. ghost_ghost_data_1:/var/lib/ghost
-```
-
-```shell
-docker cp ./backup/backups/. ghostssl_ghost_backup_data_1:/backups/
-docker exec -it ghostssl_ghost_backup_1 restore -i
-```
-
-### Install custom theme
-```shell
-docker run --volumes-from ghost_ghost_data_1 \
-  --rm=true \
-  -v $(pwd):/backup \
-  ubuntu \
-  sh -c 'cp -r /backup/gchan-casper /var/lib/ghost/themes && \
-    rm -rf /var/lib/ghost/themes/gchan-casper/.*'
+docker exec -it ghost_ghost_backup_1 restore -i
 ```
 
 ### View data volume
 ```shell
-docker run --volumes-from ghost_ghost_data_1 \
+docker run -v ghost_ghost_data:/var/lib/ghost \
   --rm=true \
-  -v $(pwd):/backup \
   -it \
   ubuntu
 ```
