@@ -2,15 +2,17 @@ version: '2'
 
 services:
   app:
+    container_name: ghost_app
     image: gordonchan/ghost-mailgun
     volumes:
-      - ghost_data:/var/lib/ghost
+      - data:/var/lib/ghost
     restart: unless-stopped
 
   server:
+    container_name: ghost_server
     image: gordonchan/nginx-ssl-ghost
     volumes:
-      - certs_data:/etc/nginx/certs
+      - certs:/etc/nginx/certs
     links:
       - app:ghost
     ports:
@@ -18,14 +20,15 @@ services:
       - "443:443"
     restart: unless-stopped
 
-  ghost_backup:
+  backup:
+    container_name: ghost_backup
     image: bennetimo/ghost-backup
     volumes:
-      - ghost_data:/var/lib/ghost
-      - ghost_backup_data:/backups
+      - data:/var/lib/ghost
+      - backup:/backups
     restart: unless-stopped
 
 volumes:
-  ghost_data:
-  ghost_backup_data:
-  certs_data:
+  data:
+  backup:
+  certs:

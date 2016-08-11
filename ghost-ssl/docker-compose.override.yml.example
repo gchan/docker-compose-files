@@ -8,6 +8,6 @@ services:
       - MAILGUN_PASS=f88a74e97cbd1c20fdd8305d83f0c66a
       - GHOST_URL=http://example.com
 
-  ghost_backup:
+  backup:
     environment:
       - BACKUPS_RETAIN_LIMIT=60
