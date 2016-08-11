@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  app:
+    environment:
+      - NODE_ENV=production
+      - MAILGUN_USER=postmaster@example.com
+      - MAILGUN_PASS=f88a74e97cbd1c20fdd8305d83f0c66a
+      - GHOST_URL=http://example.com
+
+  backup:
+    environment:
+      - BACKUPS_RETAIN_LIMIT=60
+
+  letsencrypt:
+    environment:
+      - EMAIL=elliot@allsafe.com
+      - SERVER_CONTAINER=ghost_server
+      - WEBROOT_PATH=/tmp/letsencrypt/www
+      - CERTS_PATH=/etc/nginx/certs
+      - DOMAINS=example.com www.example.com
+      - CHECK_FREQ=7

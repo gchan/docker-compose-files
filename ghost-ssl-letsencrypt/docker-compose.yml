@@ -1,0 +1,49 @@
+version: '2'
+
+services:
+  app:
+    container_name: ghost_app
+    image: gordonchan/ghost-mailgun
+    volumes:
+      - data:/var/lib/ghost
+    restart: unless-stopped
+
+  server:
+    container_name: ghost_server
+    image: gordonchan/nginx-ssl-ghost
+    volumes:
+      - certs:/etc/nginx/certs
+      - /tmp/letsencrypt/www:/tmp/letsencrypt/www
+    links:
+      - app:ghost
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped
+
+  backup:
+    container_name: ghost_backup
+    image: bennetimo/ghost-backup
+    volumes:
+      - data:/var/lib/ghost
+      - backup:/backups
+    restart: unless-stopped
+
+  letsencrypt:
+    container_name: ghost_letsencrypt
+    image: gordonchan/auto-letsencrypt
+    links:
+      - server
+    volumes:
+      - /var/log/letsencrypt/:/var/log/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /var/lib/letsencrypt:/var/lib/letsencrypt
+      - /tmp/letsencrypt/www:/tmp/letsencrypt/www
+      - certs:/etc/nginx/certs
+    restart: unless-stopped
+
+volumes:
+  data:
+  backup:
+  certs:
