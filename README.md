@@ -20,6 +20,17 @@ A multi-container [blogging](https://ghost.org/) application composed of three s
 * Nginx server using an image configured for Ghost with SSL, [gordonchan/nginx-ssl-ghost](https://github.com/gchan/dockerfiles/tree/master/nginx-ssl-ghost)
 * Ghost automatic backup service using the image [bennetimo/ghost-backup](https://hub.docker.com/r/bennetimo/ghost-backup/)
 
+
+### [ghost-ssl-letsencrypt](https://github.com/gchan/docker-compose-files/blob/master/ghost-ssl-letsencrypt/docker-compose.yml)
+Similar to [ghost-ssl](https://github.com/gchan/docker-compose-files/blob/master/ghost-ssl/docker-compose.yml) but with Let's Encrypt support for automatic certificate request and renewals.
+A multi-container [blogging](https://ghost.org/) application composed of four services (containers):
+
+* Ghost blogging platform using an image configured for Mailgun, [gordonchan/ghost-mailgun](https://github.com/gchan/dockerfiles/tree/master/ghost-mailgun)
+* Nginx server using an image configured for Ghost with SSL, [gordonchan/nginx-ssl-ghost](https://github.com/gchan/dockerfiles/tree/master/nginx-ssl-ghost)
+* Ghost automatic backup service using the image [bennetimo/ghost-backup](https://hub.docker.com/r/bennetimo/ghost-backup/)
+* Automatic SSL/TLS certificate request, renewal and installation using the image [gordonchan/auto-letsencrypt](https://hub.docker.com/r/gordonchan/auto-letsencrypt/)
+
+
 ### [spotbot](https://github.com/gchan/docker-compose-files/blob/master/spotbot/docker-compose.yml)
 Containers running a Dockerized Ruby script [(gordonchan/spotbot)](https://github.com/gchan/dockerfiles/tree/master/spotbot) to periodically check New Zealand's wholesale electricity prices and tweets when they are high.
 
