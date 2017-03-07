@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  app:
+    container_name: gogs
+    image: gordonchan/gchan-gogs
+    volumes:
+      - data:/data
+    ports:
+      - "10022:22"
+    restart: unless-stopped
+
+volumes:
+  data:
