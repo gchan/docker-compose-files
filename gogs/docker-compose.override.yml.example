@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  app:
+    networks:
+      - server_network
+
+networks:
+  server_network:
+    external: true
